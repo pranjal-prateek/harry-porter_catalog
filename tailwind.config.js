@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx}"],
+  mode: "jit",
   theme: {
-    extend: {},
+    extend: {
+      height:{
+        'carousel':'45.5rem',
+        'overlay':'70%'
+      }
+    },
   },
   plugins: [],
-}
+};
