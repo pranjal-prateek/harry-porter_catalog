@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from "react-router-dom";
+import Spell from "./Spell";
 
 const Home = () => {
     const [data,setData]=useState([])
@@ -22,10 +23,12 @@ const Home = () => {
       <Carousel
       showThumbs={false}
       autoPlay={true}
-      transitionTime={2}
+      transitionTime={3}
       infiniteLoop={true}
       showStatus={false}
       showArrows={false}
+      showIndicators={true}
+      autoFocus={true}
       >
         {carouselData.map((spell)=>{
             return(
@@ -48,6 +51,7 @@ const Home = () => {
            
         })}
       </Carousel>
+      <Spell/>
     </div>
   )
 }
