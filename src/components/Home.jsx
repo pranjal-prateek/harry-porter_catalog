@@ -14,7 +14,7 @@ const Home = () => {
         .then(data=>setDataPage1(data.data))
         window.scrollTo(0,0)
     },[])
-    console.log(datapage1,"data")
+
     const carouselData=datapage1.filter((item,index)=>{
        if (index<15){
         return item
@@ -36,11 +36,11 @@ const Home = () => {
         {carouselData.map((spell)=>{
             return(
                 <Link style={{textDecoration:"none",color:"white"}} to={`/spell/${spell.id}`} key={spell.id}>
-                    <div className="h-carousel">
+                    <div className="h-300 sm:h-carousel">
                         <img className="block m-auto w-full" src={spell.attributes.image} alt={spell.attributes.name}/>
                     </div>
-                    <div className=" absolute p-20 bottom-0  flex flex-col w-full justify-end items-start bg-gradient-to-t from-black to-transparent opacity-100 hover:opacity-100">
-                        <div className="font-black text-6xl mb-1.5 text-left">{spell.attributes.name ? spell.attributes.name: "Potter"}</div>
+                    <div className=" absolute p-20 pt-5 sm:pt-20 bottom-0  flex flex-col w-full justify-end items-start bg-gradient-to-t from-black to-transparent opacity-100 hover:opacity-100">
+                        <div className="font-black sm:text-6xl text-3xl mb-1.5 text-left">{spell.attributes.name ? spell.attributes.name: "Potter"}</div>
                             <div className="text-3xl mb-4">
                                 {spell.attributes.category ? spell.attributes.category : "Harry Potter"}
                                     <span className="mb-20">

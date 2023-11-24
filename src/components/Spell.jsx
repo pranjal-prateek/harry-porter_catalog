@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import Card from "./Card"
 import { Button } from '@mui/material';
-import { Search } from "../assets";
+import { Search,Cross } from "../assets";
 import { BiChevronDown } from "react-icons/bi";
 
 const Spell = ({data}) => {
@@ -15,7 +16,6 @@ const Spell = ({data}) => {
     const [datapage4,setDataPage4]=useState([])
     const [searchText,setSearchText]=useState("")
     const [pageNo,setPageNo] =useState(1)
-    console.log(selected,"jjjjjj")
     useEffect(()=>{
         fetch(`https://api.potterdb.com/v1/spells?page[number]=2`)
         .then(res=>res.json())
@@ -60,16 +60,22 @@ if(searchText!==""){
     setVisibleSpells(searchedValue)
 }
 },[searchText,pageNo,data,datapage2,datapage3,datapage4,selected])
-console.log(category,"catagory");
-console.log(visibleSpells, searchText ,"fsdfds")
+
+const clearFilters=()=>{
+    setPageNo(1)
+    setSearchText("")
+    setSelected("")
+}
   return (
     <div>
-        <div className="flex flex-row gap-6 items-center">
-        <div className="mb-6 mt-6 ml-16 relative flex items-center">
+        <div className="flex flex-col sm:flex-row  gap-6 items-center  ">
+        <div className="mb-6 mt-6 ml-16 relative flex items-center ">
             <img className="w-5 h-5 absolute ml-3" src={Search} alt={'search'}/>
             <input type="text" placeholder="Search Spell" className="px-3 pl-10 py-2 font-semibold placeholder-gray-300 bg-gray-900 rounded-2xl border-none ring-gray-400 focus:ring-gray-800 focus:ring-2"  value={searchText} onChange={(e)=>setSearchText(e.target.value)}/>
+            <img className="w-5 h-5 absolute ml-3" src={Search} alt={'search'}/>
         </div>
-        <div className="w-72 font-medium h-10 z-100">
+        <div className="w-40 font-medium h-10 z-100 justify-center items-center mb-6 sm:mb-0 sm:w-72">
+
               <div
         onClick={() => setOpen(!open)}
         className={`bg-gray-900 w-full p-2 flex items-center justify-between rounded ${
@@ -109,7 +115,12 @@ console.log(visibleSpells, searchText ,"fsdfds")
         ))}
             </ul>
         </div>
+        {(searchText!=="" || selected!=="")? <div>
+        <img onClick={clearFilters} className="w-5 h-5  ml-3" src={Cross} alt={'cross'}/>
+        </div>:null}
+       
         </div>
+
        <div className=" pt-0 px-12 pb-12 ">
             <div className=" flex flex-wrap justify-center">
                 {
@@ -121,16 +132,17 @@ console.log(visibleSpells, searchText ,"fsdfds")
                 }
             </div>
         </div>
-        <div className="px-16 flex flex-row flex-wrap justify-between items-center">
-            <Button disabled={pageNo===1} onClick={()=>setPageNo(1)} variant="outlined">Prev</Button>
+        {(searchText==="" && selected==="")? <div className="px-16 flex gap-2 flex-col flex-wrap justify-center items-center sm:flex-row sm:gap-0  sm:justify-between ">
+            <Button disabled={pageNo===1} onClick={()=>setPageNo(pageNo-1)} variant="outlined">Prev</Button>
             <div className="flex flex-row flex-wrap">
             <Button onClick={()=>setPageNo(1)} variant="outlined">1</Button>
             <Button onClick={()=>setPageNo(2)} variant="outlined">2</Button>
             <Button  onClick={()=>setPageNo(3)} variant="outlined">3</Button>
             <Button  onClick={()=>setPageNo(4)} variant="outlined">4</Button>
             </div>
-            <Button disabled={pageNo===4} onClick={()=>setPageNo(2)} variant="outlined">Next</Button>
-        </div>
+            <Button disabled={pageNo===4} onClick={()=>pageNo+1} variant="outlined">Next</Button>
+        </div>:null}
+       
     </div>
   )
 }

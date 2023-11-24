@@ -21,7 +21,7 @@ export default {
         'overlay':'70%',
         'card':'300px',
         'cardOverlay':'290px',
-        'moviedetails':"500px",
+        'carddetails':"500px",
         '450':'450px',
         '400':'400px',
         '350':'350px',
