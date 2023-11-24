@@ -10,7 +10,7 @@ const Card = ({spell}) => {
    useEffect(()=>{
     setTimeout(() => {
         setIsLoading(false)
-    }, 6000);
+    }, 3000);
    },[])
   return (
     <div>
@@ -22,6 +22,7 @@ const Card = ({spell}) => {
             </SkeletonTheme>
         </div>
         :
+         
         <Link to={`/spell/${spell.id}`} style={{textDecoration:"none", color:"white"}}>
             <div className=' inline-block transition transform delay-150 relative rounded-cardradius overflow-hidden ml-0.5 cursor-pointer min-w-card h-card z-0 border-1 border-solid border-cardborder hover:scale-125 hover:z-100 hover:shadow-xl'>
                 <img className="h-full w-52 "  src={spell.attributes.image?spell.attributes.image:harry} alt={spell.attributes.name}/>

@@ -5,14 +5,17 @@ import { Link } from "react-router-dom";
 import Spell from "./Spell";
 
 const Home = () => {
-    const [data,setData]=useState([])
+    
+    const [datapage1,setDataPage1]=useState([])
+    
     useEffect(()=>{
-        fetch('data.json')
+        fetch(`https://api.potterdb.com/v1/spells?page[number]=1`)
         .then(res=>res.json())
-        .then(data=>setData(data.data))
+        .then(data=>setDataPage1(data.data))
+        window.scrollTo(0,0)
     },[])
-    console.log(data,"data")
-    const carouselData=data.filter((item,index)=>{
+    console.log(datapage1,"data")
+    const carouselData=datapage1.filter((item,index)=>{
        if (index<15){
         return item
        }
@@ -51,7 +54,7 @@ const Home = () => {
            
         })}
       </Carousel>
-      <Spell/>
+      <Spell data={datapage1}/>
     </div>
   )
 }

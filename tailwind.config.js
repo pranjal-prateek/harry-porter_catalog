@@ -24,7 +24,8 @@ export default {
         'moviedetails':"500px",
         '450':'450px',
         '400':'400px',
-        '350':'350px'
+        '350':'350px',
+        '320':'320px'
       },
       borderWidth:{
         '1':"1px"
